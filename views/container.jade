@@ -1,0 +1,15 @@
+h3 Your Terminal
+
+p
+  pre.pre-scrollable.terminal
+    {{content}}{{command}}
+
+  form(ng-submit="send();")
+    .row
+      .col-lg-6
+        .input-group
+          input.form-control(ng-model="command")
+          span.input-group-btn
+            button.btn.btn-danger(type="button", ng-click="send();") exec
+        p
+          a.btn-link(ng-click="clear();") clear
