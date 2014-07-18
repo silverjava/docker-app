@@ -33,17 +33,16 @@ angular.module('dockerApp.controllers', [])
           $scope.$apply(function () {
             $scope.content += data.toString();
             $timeout(function () {
-            var shellWin = $('.pre-scrollable');
-            if (shellWin) {
-              shellWin.scrollTop(shellWin[0].scrollHeight);
-            }
-          });
+              var shellWin = $('.pre-scrollable');
+              if (shellWin) {
+                shellWin.scrollTop(shellWin[0].scrollHeight);
+              }
+            });
           });
         })
       });
 
       $scope.content = '';
-
       $scope.send = function() {
         if ($scope.command) {
           inputStream.write($scope.command + '\r');
