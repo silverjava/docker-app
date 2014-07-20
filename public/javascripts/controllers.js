@@ -1,9 +1,38 @@
 'use strict';
 
 angular.module('dockerApp.controllers', [])
-  .controller('AppCtrl', ['$scope',
-    function($scope) {
+  .controller('AppCtrl', ['$document', '$scope',
+    function($document, $scope) {
       $scope.name = "Express Angular";
+      $document.keydown(function(event) {
+        // tab
+        if (event.keyCode === 9) {
+          $scope.$apply(function () {
+            $scope.$broadcast('tab');
+          });
+          return false;
+        }
+        // backspace
+        if (event.keyCode === 8) {
+          $scope.$apply(function () {
+            $scope.$broadcast('backspace');
+          });
+        }
+        // enter
+        if (event.keyCode === 13) {
+          $scope.$apply(function () {
+            $scope.$broadcast('enter');
+          });
+          return false;
+        }
+        // ctrl + c
+        if (event.ctrlKey && event.keyCode === 67) {
+          $scope.$apply(function() {
+            $scope.$broadcast('Ctrl+C');
+          });
+          return false;
+        }
+      });
     }
   ])
   .controller('ImageCtrl', ['$scope', '$location', 'imageService', 'containerService',
@@ -24,15 +53,29 @@ angular.module('dockerApp.controllers', [])
     function($scope, $routeParams, $timeout, socket) {
       var inputStream = ss.createStream();
 
+      $scope.$on('tab', function (event) {
+        inputStream.write($scope.command + '\t\t');
+        $scope.command = '';
+      });
+
+      $scope.$on('enter', function (event) {
+        inputStream.write($scope.command + '\n');
+        $scope.command = '';
+      });
+
+      $scope.$on('backspace', function (event) {
+        inputStream.write('\b');
+      });
+
       ss(socket).emit('attachContainer', inputStream, {
         containerId: $routeParams.id
       });
 
-      ss(socket).on('terminalOutput', function (stream, data) {
-        stream.on('data', function (data) {
-          $scope.$apply(function () {
+      ss(socket).on('terminalOutput', function(stream, data) {
+        stream.on('data', function(data) {
+          $scope.$apply(function() {
             $scope.content += data.toString();
-            $timeout(function () {
+            $timeout(function() {
               var shellWin = $('.pre-scrollable');
               if (shellWin) {
                 shellWin.scrollTop(shellWin[0].scrollHeight);
@@ -43,15 +86,6 @@ angular.module('dockerApp.controllers', [])
       });
 
       $scope.content = '';
-      $scope.send = function() {
-        if ($scope.command) {
-          inputStream.write($scope.command + '\r');
-          $scope.command = '';
-        }
-      };
-
-      $scope.clear = function () {
-        $scope.content = '';
-      };
+      $scope.command = '';
     }
   ]);
