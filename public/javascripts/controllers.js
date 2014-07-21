@@ -63,6 +63,11 @@ angular.module('dockerApp.controllers', [])
         $scope.command = '';
       });
 
+      $scope.$on('Ctrl+C', function (event) {
+        inputStream.write('\u0003');
+        $scope.command = '';
+      });
+
       $scope.$on('backspace', function (event) {
         inputStream.write('\b');
       });
