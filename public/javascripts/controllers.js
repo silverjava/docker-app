@@ -77,9 +77,9 @@ angular.module('dockerApp.controllers', [])
       });
 
       ss(socket).on('terminalOutput', function(stream, data) {
-        stream.on('data', function(data) {
+        stream.on('data', function (data) {
           $scope.$apply(function() {
-            $scope.content += data.toString();
+            $scope.content += data;
             $timeout(function() {
               var shellWin = $('.pre-scrollable');
               if (shellWin) {
