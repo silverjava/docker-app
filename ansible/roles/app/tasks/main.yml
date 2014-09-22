@@ -1,2 +1,6 @@
 - name: npm install all packages
   npm: path=/vagrant/app
+
+- name: bower install all client libs
+  sudo: false
+  command: chdir=/vagrant/app bower install

@@ -4,5 +4,8 @@
 - name: install nodejs
   apt: pkg=nodejs state=latest install_recommends=no
 
-- name: install nodemon
-  npm: name=nodemon global=yes state=latest
+- name: install global packages
+  npm: name={{item}} global=yes state=latest
+  with_items:
+    - nodemon
+    - bower
