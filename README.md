@@ -1,33 +1,20 @@
 This is a Web Terminal application.
 
-The tach stack is:
- - Node
- - Express 4.2
- - Socket.IO
- - Socket.IO-stream
- - Dockerode
- - Docker
- - AngularJS
+Only need a few steps to run this applicaiton:
 
-To run it, you have to do:
+First, please start vagrant up in base directory:
 
-STEP 1:
+	vagrant up
 
-```
-npm install
-bower install
-```
+Second, connect to the vagrant vis ssh:
 
-STEP 2:
+	vagrant ssh
 
-install docker and pull some images.
+Third, use **nodemon** to run the app:
 
-STEP 3:
+	cd /vagrant/app
+	nodemon app.js
 
-```
-node app.js
-```
-
-STEP 4:
-
-visit http://localhost:3000 and select one image to start a container.
+Visit the url http://localhost:3000 in your browser, then the dropdown list should be displayed.
+	
+	
