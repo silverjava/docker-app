@@ -1,0 +1,9 @@
+- name: install docker
+  shell: curl -sSL https://get.docker.io/ubuntu/ | sudo sh
+
+- name: pull images
+  shell: docker pull {{item}}
+  with_items:
+    - centos:centos6
+    # - centos:centos7
+    # - ubuntu:14.10
