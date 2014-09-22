@@ -1,0 +1,2 @@
+- name: npm install all packages
+  npm: path=/vagrant/app

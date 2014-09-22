@@ -1,2 +1,5 @@
 - name: replace source repo to speed up the download speed
   copy: src=sources.list dest=/etc/apt/sources.list
+
+- name: install development tools
+  apt: name=g++ state=present install_recommends=no
