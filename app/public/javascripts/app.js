@@ -16,7 +16,6 @@ angular.module('dockerApp', [
     })
     .when('/containers/:id', {
       templateUrl: '/views/container',
-      controller: 'ContainerCtrl'
     })
     .otherwise({
       redirectTo: '/'

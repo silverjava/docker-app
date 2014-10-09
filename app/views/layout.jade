@@ -6,12 +6,13 @@ html(ng-app='dockerApp')
     link(rel='stylesheet', href='/components/bootstrap/dist/css/bootstrap-theme.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/components/jquery.terminal/css/jquery.terminal.css')
-  body(ng-controller='AppCtrl')
+  body
     block content
 
     script(src='components/jquery/dist/jquery.min.js')
     script(src='components/jquery.terminal/js/jquery.mousewheel-min.js')
     script(src='components/jquery.terminal/js/jquery.terminal-min.js')
+    script(src='components/term.js/src/term.js')
     script(src='components/angular/angular.min.js')
     script(src='components/angular-route/angular-route.min.js')
     script(src='components/angular-resource/angular-resource.min.js')

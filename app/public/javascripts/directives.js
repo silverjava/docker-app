@@ -1,25 +1,30 @@
 'use strict';
 
 angular.module('dockerApp.directives', [])
-    .directive('terminal', ['$timeout', function($timeout) {
-        return {
-            // scope: {}, // {} = isolate, true = child, false/undefined = no change
-            restrict: 'E', // E = Element, A = Attribute, C = Class, M = Comment
-            template: '<div></div>',
-            replace: true,
-            link: function($scope, iElm, iAttrs, controller) {
-                iElm.terminal(function(command, term) {
-                    term.echo(command);
-                }, {
-                    greetings: '',
-                    name: '',
-                    height: 400,
-                    prompt: 'root> '
-                });
+  .directive('term', ['$timeout', '$routeParams', 'socket', function($timeout, $routeParams, socket) {
+    return {
+      restrict: 'E',
+      template: '<div></div>',
+      replace: true,
+      link: function($scope, iElm, iAttrs, controller) {
+        var terminal = new Terminal();
+        terminal.open();
 
-                $scope.$on("$destroy",function(){
-                  iElm.destroy();
-                });
-            }
-        };
-    }]);
+        var inputStream = ss.createStream();
+
+        terminal.on('data', function(data) {
+          inputStream.write(data);
+        });
+
+        ss(socket).emit('attachContainer', inputStream, {
+          containerId: $routeParams.id
+        });
+
+        ss(socket).on('terminalOutput', function(stream, data) {
+          stream.on('data', function(data) {
+            terminal.write(data + "");
+          })
+        });
+      }
+    };
+  }]);;
