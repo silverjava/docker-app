@@ -1,3 +1,4 @@
 app/node_modules
 app/public/components
+app/public/stylesheets/style.css
 .vagrant
