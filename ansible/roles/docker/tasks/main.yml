@@ -5,4 +5,3 @@
   shell: docker pull {{item}}
   with_items:
     - node:latest
-    # - ruby:latest

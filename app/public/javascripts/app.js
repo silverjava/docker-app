@@ -5,6 +5,7 @@ angular.module('dockerApp', [
   'ngResource',
   'dockerApp.controllers',
   'dockerApp.services',
+  'dockerApp.directives',
   'btford.socket-io'
 ])
 .config(function ($routeProvider, $locationProvider) {
