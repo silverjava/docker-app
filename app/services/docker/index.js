@@ -21,7 +21,7 @@ images.list = function () {
 // start for containers
 containers.create = function (image) {
   var optsc = {
-    'Hostname': '',
+    'Hostname': 'cowboy',
     'User': '',
     'AttachStdin': true,
     'AttachStdout': true,
