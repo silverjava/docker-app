@@ -18,4 +18,3 @@ Third, use **nodemon** to run the app:
 
 Visit the url http://localhost:3000 in your browser, then the dropdown list should be displayed.
 	
-	
