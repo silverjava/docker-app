@@ -29,17 +29,18 @@ containers.create = function (image) {
     'Tty': true,
     'OpenStdin': true,
     'StdinOnce': false,
-    'Env': null,
     'Cmd': ['bash'],
-    'Dns': ['8.8.8.8', '8.8.4.4'],
+    'Env': null,
     'Image': image,
-    'Volumes': {},
-    'VolumesFrom': ''
   };
+
+      
   var deferred = Q.defer();
 
+  console.log("=======");
   docker.createContainer(optsc, function(err, container) {
     if (err) {
+      console.log("===", err);
       deferred.reject(err);
     } else {
       deferred.resolve(container);

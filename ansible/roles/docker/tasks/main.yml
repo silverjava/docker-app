@@ -1,5 +1,5 @@
 - name: install docker
-  shell: curl -sSL https://get.docker.io/ubuntu/ | sudo sh
+  shell: curl -sSL https://get.docker.com/ | sh
 
 - name: pull images
   shell: docker pull {{item}}
